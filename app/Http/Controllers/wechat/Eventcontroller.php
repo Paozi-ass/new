@@ -9,6 +9,8 @@ class EventController extends Controller
 {
     public function event()
     {
+        
         echo $_GET['echostr'];
+
     }
 }
