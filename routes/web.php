@@ -103,7 +103,7 @@ Route::any('/wechat_user_add','wechat\IndexController@wechat_user_add');
 
 
 
-Rout::any('wechat/event','wechat\EventController@event');
+Route::any('wechat/event','wechat\EventController@event');
 
 
 
