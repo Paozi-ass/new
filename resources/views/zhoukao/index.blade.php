@@ -14,7 +14,9 @@
             订单状态<input type="text" name="desc">
             <input type="submit" value="搜索">
         </form>
+        
         <table border=1>
+        <tbody id="list">
             <tr>
                 <td>订单号</td>
                 <td>下单时间</td>
@@ -24,23 +26,29 @@
                 <td>订单状态</td>
                 <td>操作</td>
             </tr>
-        @foreach ($dingdan as $v)
             <tr>
-                <td>{{$v->d_danhao}}</td>
-                <td>{{$v->create_at}}</td>
-                <td>{{$v->c_id}}</td>
-                <td>{{$v->price}}</td>
-                <td>{{$v->d_price}}</td>
-                <td>
-                @if($v->d_desc==1)已分单，已付款，已发货
-                @else 未确认，未付款，未发货
-                @endif
-                </td>
-                <td><a href="{{url('zhoukao/list/'.$v->c_id)}}">查看</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
-        @endforeach
-        
+        </tbody>
         </table>
-        {{ $dingdan->appends($query)->links() }}
+       
 </body>
 </html>
+<script src="{{asset('jq.js')}}"></script>
+<script>
+    $.ajax({
+        url:"http://www.1903.com/zhoukao/index",
+        dataType:"json",
+        success:function(res){
+            $.each(res.data,function(i,v){
+                var tr =$("<tr></tr>");
+                tr.append("<td>"+v.d_id+"</td>");
+                tr.append("<td>"+v.d_danhao+"</td>");
+                tr.append("<td>"+v.c_id+"</td>");
+                $('#list').append(tr);
+            })
+        }
+    })
+</script>

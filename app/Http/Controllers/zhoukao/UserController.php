@@ -34,21 +34,24 @@ class UserController extends Controller
     public function index()
     {
         $dingmodel = new dingdan;
-        $goods = new GoodsModel;
-        $query = request()->except('_token');
-        $danhao = $query['danhao']??"";
-        $where = [];
-        if($danhao){
-            $where[]=['d_danhao','=',$danhao];
-        }
-        $desc = $query['d_desc']??'';
-        if($desc){
-            $where[]=['d_desc','=',$desc];
-        } 
+        // $goods = new GoodsModel;
+        // $query = request()->except('_token');
+        // $danhao = $query['danhao']??"";
+        // $where = [];
+        // if($danhao){
+        //     $where[]=['d_danhao','=',$danhao];
+        // }
+        // $desc = $query['d_desc']??'';
+        // if($desc){
+        //     $where[]=['d_desc','=',$desc];
+        // } 
        
-        $dingdan = $dingmodel->where($where)->paginate(1);
-        // dd($dingdan);
-        return view('zhoukao/index',compact('query','danhao','desc','dingdan'));
+        // $dingdan = $dingmodel->where($where)->paginate(1);
+        // // dd($dingdan);
+        // return view('zhoukao/index',compact('query','danhao','desc','dingdan'));
+        $okk =$dingmodel->get()->toArray();
+        // dd($okk);
+        return json_encode(['ret'=>1,'msg'=>"查询成功",'data'=>$okk]);
     }
 
     public function list($id)

@@ -21,6 +21,9 @@ Route::any('/edit','index\StudentController@edit');
 Route::any('/update','index\StudentController@update');
 Route::any('/delete','index\StudentController@delete');
 
+
+
+
 Route::prefix('student')->group(function () {
     Route::any('index','admin\StudentController@index');
     Route::any('add','admin\StudentController@add');
@@ -82,6 +85,28 @@ Route::prefix('zhoukao')->group(function () {
     Route::any('/list/{id}','zhoukao\UserController@list');
     Route::any('/search','zhoukao\UserController@search');
 });
+Route::get('zhoukao/linlin',function(){
+    return view('zhoukao/index');
+});
+
+
+Route::any('/login','wechat\IndexController@login');
+Route::any('/wechat','wechat\IndexController@index');
+Route::any('/taglist','wechat\IndexController@tag_list');
+Route::any('/tagadd','wechat\IndexController@tag_add');
+Route::any('/tag_add_do','wechat\IndexController@tag_add_do');
+Route::any('/tag_update','wechat\IndexController@tag_update');
+Route::any('/tag_update_do','wechat\IndexController@tag_update_do');
+Route::any('/tag_del','wechat\IndexController@tag_del');
+Route::any('/wechatuser','wechat\IndexController@wechat_user');
+Route::any('/wechat_user_add','wechat\IndexController@wechat_user_add');
+
+
+
+Rout::any('wechat/event','wechat\EventController@event');
+
+
+
 
 
 
