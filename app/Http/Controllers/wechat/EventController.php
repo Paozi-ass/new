@@ -30,13 +30,22 @@ class EventController extends Controller
         // simplexml_load_string转换形式良好的 XML 字符串为 SimpleXMLElement 对象，然后输出对象的键和元素
         $xml_obj = simplexml_load_string($info,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
+        // dd($this->tools->get_wechat_user($xml_arr['FromUserName']));
         // dd($xml_arr);
         // 关注操作
-            // if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
-            //     dd('1111');
-            //     $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
-            //     dd($wechat_user);
-            // }
+            if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
+                // dd('1111');
+                $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
+                // dd($wechat_user);
+                $msg = '你好'.$wechat_user['nickname'].'欢迎关注我的公众号!';
+                echo "<xml>
+                <ToUserName><![CDATA[".$xml_arr['FromUserName']."]></ToUserName>
+                <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
+                <CreateTime>".time()."</CreateTime>
+                <MsgType><![CDATA[event]]></MsgType>
+                <Event><![CDATA[subscribe]]></Event>
+              </xml>";
+            }
 
         // 普通操作
         if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="1111")
