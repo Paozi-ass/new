@@ -100,6 +100,9 @@ Route::any('/tag_update_do','wechat\IndexController@tag_update_do');
 Route::any('/tag_del','wechat\IndexController@tag_del');
 Route::any('/wechatuser','wechat\IndexController@wechat_user');
 Route::any('/wechat_user_add','wechat\IndexController@wechat_user_add');
+Route::any('/upload','wechat\ResourceController@upload');
+Route::any('/upload_do','wechat\ResourceController@upload_do');
+
 
 
 

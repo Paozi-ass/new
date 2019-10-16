@@ -4,13 +4,20 @@ namespace App\Http\Controllers\wechat;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Tools\Tools;
 
 class EventController extends Controller
 {
+    public $tools;
+    public $request;
+    public function __construct(Tools $tools,Request $request)
+    {
+        $this->tools=$tools;
+        $this->request=$request;
+    }
     
     public function event()
     {
-
         // echo $_GET['echostr'];
         // dd (11111);
         // php://input是一个只读信息流，当请求方式是post的，并且enctype不等于”multipart/form-data”时，可以使用php://input来获取原始请求的数据
@@ -23,10 +30,30 @@ class EventController extends Controller
         // simplexml_load_string转换形式良好的 XML 字符串为 SimpleXMLElement 对象，然后输出对象的键和元素
         $xml_obj = simplexml_load_string($info,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
-    //     dd($xml_arr);
+        // dd($xml_arr);
+        // 关注操作
+            // if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
+            //     dd('1111');
+            //     $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
+            //     dd($wechat_user);
+            // }
+
+        // 普通操作
+        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="1111")
+        {
+            $msg = "来了老弟！！！";
+            echo"<xml>
+            <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
+            <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
+            <CreateTime>".time()."</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA[".$msg."]]></Content>
+            
+          </xml>";
+        }
     //     echo"<xml>
-    //     <ToUserName><![CDATA[toUser]]></ToUserName>
-    //     <FromUserName><![CDATA[fromUser]]></FromUserName>
+    //     <ToUserName><![CDATA[gh_6a15bbd97d0e]]></ToUserName>
+    //     <FromUserName><![CDATA[oIW2quOl81K5sUNQHRXNIl_3ELtI]]></FromUserName>
     //     <CreateTime>12345678</CreateTime>
     //     <MsgType><![CDATA[text]]></MsgType>
     //     <Content><![CDATA[你好]]></Content>

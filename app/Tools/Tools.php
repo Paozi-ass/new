@@ -1,6 +1,6 @@
 <?php
 namespace App\Tools;
-
+use Illuminate\Support\Facades\Cache; 
 
 
 class Tools{
@@ -41,7 +41,7 @@ class Tools{
             $wechat_access_token = Cache::get($key);
         }else{
             // 取不到，掉接口，缓存
-            $re = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx04e4d9d383981194&secret=369ec3b2641e4c25ff24e9bbe0163012');
+            $re = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_APPSECRET'));
             $result = json_decode($re,true);
             // dd($result);
             Cache::put($key,$result['access_token'],$result['expires_in']);
@@ -85,6 +85,34 @@ class Tools{
          curl_close($curl);
          return $result;
      }
+
+
+
+       /**
+     * 微信素材专用 post
+     * @param $url
+     * @param $path
+     * @return mixed
+     */
+    public function wechat_curl_file($url,$path)
+    {
+        $curl=curl_init($url);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,false);
+
+
+        curl_setopt($curl,CURLOPT_POST,true);
+        $data=[
+            'media'=>new \CURLFile(realpath($path)),
+        ];
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
+
+
+        $result=curl_exec($curl);
+        curl_close($curl);
+        return $result;
+    }
 
     
 }
