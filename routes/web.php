@@ -102,7 +102,11 @@ Route::any('/wechatuser','wechat\IndexController@wechat_user');
 Route::any('/wechat_user_add','wechat\IndexController@wechat_user_add');
 Route::any('/upload','wechat\ResourceController@upload');
 Route::any('/upload_do','wechat\ResourceController@upload_do');
+Route::any('/menu_list','wechat\MenuController@menu_list');
+Route::any('/create_menu','wechat\MenuController@create_menu');
 
+Route::any('/zhoukao','wechat\ZhoukaoController@index');
+Route::any('/send','wechat\ZhoukaoController@send');
 
 
 
@@ -127,3 +131,5 @@ Route::any('wechat/event','wechat\EventController@event');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//公众号调用或第三方平台帮公众号调用对公众号的所有api调用（包括第三方帮其调用）次数进行清零：
+Route::get('clear_api','wechat\IndexController@clear_api');

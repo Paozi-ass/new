@@ -190,6 +190,17 @@ class IndexController extends Controller
         $req = request()->all();
         dd($req);
     }
-
+     /**
+     * 公众号调用或第三方平台帮公众号调用对公众号的所有api调用（包括第三方帮其调用）次数进行清零：
+     */
+    public function clear_api()
+    {
+//        echo 11;die;
+        $url='https://api.weixin.qq.com/cgi-bin/clear_quota?access_token='.$this->get_access_token();
+        $data=['appid'=>env('WECHAT_APPID')];
+        $re=$this->curl_post($url,json_encode($data));
+        $result=json_decode($re,1);
+        dd($result);
+    }
 }
 
