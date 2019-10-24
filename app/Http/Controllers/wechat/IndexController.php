@@ -10,12 +10,12 @@ class IndexController extends Controller
 {
     public function login()
     {
-        
+
     }
 
     public function index()
     {
-        
+
        //$info = file_get_contents('http://wechat.18022480300.com/wechat/index');
     //    $access_token = $this->get_access_token();
     //    echo $access_token;
@@ -52,6 +52,20 @@ class IndexController extends Controller
             $wechat_access_token = $result['access_token'];
         }
         return $wechat_access_token;
+    }
+
+
+    public function wechat_message()
+    {
+        // openid用户标识
+        $openid=file_get_contents('https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$this->get_access_token().'&next_openid=');
+        //    dd($openid);
+        $re=json_decode($openid,1);
+//            dd($re);
+        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->get_access_token()."&openid=".v."&lang=zh_CN";
+        $get = $this->curl_get($url);
+        dd($get);
+
     }
 
     // post请求
@@ -104,7 +118,7 @@ class IndexController extends Controller
     // 标签创建（添加）
     public function tag_add()
     {
-       
+
         return view('wechat.tag_add');
     }
 

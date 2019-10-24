@@ -1,31 +1,21 @@
 <?php
 namespace App\Tools;
-use Illuminate\Support\Facades\Cache; 
+use Illuminate\Support\Facades\Cache;
 
 
 class Tools{
 
-    public function get_wechat_user()
+    /**
+     * 根据openid获取用户的基本新
+     * @param $openid
+     * @return mixed
+     */
+    public function get_wechat_user($openid)
     {
-        
-       //$info = file_get_contents('http://wechat.18022480300.com/wechat/index');
-    //    $access_token = $this->get_access_token();
-    //    echo $access_token;
-    // openid用户标识
-    $openid=file_get_contents('https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$this->get_access_token().'&next_openid=');
-    //    dd($openid);
-        $re=json_decode($openid,1);
-    //    dd($re);
-        $openid_list=[];
-        foreach ($re['data']['openid'] as $v)
-        {
-            $user_info=file_get_contents('https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->get_access_token().'&openid='.$v.'&lang=zh_CN');
-            $res=json_decode($user_info,1);
-    //          dd($res);
-            $openid_list[]=$res;
-        }
-    //    dd($openid_list);
-        return $openid_list;
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->get_access_token().'&openid='.$openid.'&lang=zh_CN';
+        $re = file_get_contents($url);
+        $result = json_decode($re,1);
+        return $result;
     }
 
 
@@ -58,18 +48,18 @@ class Tools{
          curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
          curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
          curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,false);
- 
- 
+
+
          curl_setopt($curl,CURLOPT_POST,true);
          curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
- 
- 
+
+
          $result=curl_exec($curl);
          curl_close($curl);
          return $result;
      }
- 
- 
+
+
      /**
       * curl get传
       * @param $url
@@ -103,7 +93,7 @@ class Tools{
 
 
         curl_setopt($curl,CURLOPT_POST,true);
-       
+
         curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
 
 
@@ -112,7 +102,7 @@ class Tools{
         return $result;
     }
 
-    
+
 }
 
 

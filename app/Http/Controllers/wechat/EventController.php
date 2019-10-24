@@ -31,26 +31,26 @@ class EventController extends Controller
         $xml_obj = simplexml_load_string($info,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
         // dd($this->tools->get_wechat_user($xml_arr['FromUserName']));
-//         dd($xml_arr);
+//         dd($xml_arr['MsgType']);
         // 关注操作
             if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
-                // dd('1111');
-                $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
-                 dd($wechat_user);
+//                 dd($xml_arr['FromUserName']);
+                $wechat_user = $this->tools->get_wechat_user('oIW2quOl81K5sUNQHRXNIl_3ELtI');
+//                 dd($wechat_user);
                 $msg = '你好'.$wechat_user['nickname'].'欢迎关注我的公众号!';
                 echo "<xml>
-                <ToUserName><![CDATA[".$xml_arr['FromUserName']."]></ToUserName>
-                <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
-                <CreateTime>".time()."</CreateTime>
-                <MsgType><![CDATA[event]]></MsgType>
-                <Event><![CDATA[subscribe]]></Event>
-              </xml>";
+              <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
+                    <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
+                    <CreateTime>".time()."</CreateTime>
+                    <MsgType><![CDATA[text]]></MsgType>
+                    <Content><![CDATA[".$msg."]]></Content>
+                    </xml>";
             }
 
         // 普通操作
-        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="1111")
+        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="闫小璐")
         {
-            $msg = "来了老弟！！！";
+            $msg = "闫小璐咋！闫小璐牛逼！！！";
             echo"<xml>
             <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
             <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>

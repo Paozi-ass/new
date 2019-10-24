@@ -94,6 +94,7 @@ Route::any('/login','wechat\IndexController@login');
 Route::any('/wechat','wechat\IndexController@index');
 Route::any('/taglist','wechat\IndexController@tag_list');
 Route::any('/tagadd','wechat\IndexController@tag_add');
+Route::any('/wechat_message','wechat\IndexController@wechat_message');
 Route::any('/tag_add_do','wechat\IndexController@tag_add_do');
 Route::any('/tag_update','wechat\IndexController@tag_update');
 Route::any('/tag_update_do','wechat\IndexController@tag_update_do');
