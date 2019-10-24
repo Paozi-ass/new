@@ -9,5 +9,5 @@ class user extends Model
     protected $table = 'user';
 	protected $primaryKey='uid';
     public $timestamps= false;
-    protected $fillable = ['uname','upwd','shenfen'];
+    protected $fillable = ['uname','qrcode','share_num'];
 }

@@ -15,7 +15,7 @@ class EventController extends Controller
         $this->tools=$tools;
         $this->request=$request;
     }
-    
+
     public function event()
     {
         // echo $_GET['echostr'];
@@ -31,12 +31,12 @@ class EventController extends Controller
         $xml_obj = simplexml_load_string($info,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
         // dd($this->tools->get_wechat_user($xml_arr['FromUserName']));
-        // dd($xml_arr);
+         dd($xml_arr);
         // 关注操作
             if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
                 // dd('1111');
                 $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
-                // dd($wechat_user);
+                 dd($wechat_user);
                 $msg = '你好'.$wechat_user['nickname'].'欢迎关注我的公众号!';
                 echo "<xml>
                 <ToUserName><![CDATA[".$xml_arr['FromUserName']."]></ToUserName>
@@ -67,7 +67,7 @@ class EventController extends Controller
     //     <MsgType><![CDATA[text]]></MsgType>
     //     <Content><![CDATA[你好]]></Content>
     //   </xml>";
-     
+
 
     }
 }

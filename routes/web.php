@@ -104,6 +104,11 @@ Route::any('/upload','wechat\ResourceController@upload');
 Route::any('/upload_do','wechat\ResourceController@upload_do');
 Route::any('/menu_list','wechat\MenuController@menu_list');
 Route::any('/create_menu','wechat\MenuController@create_menu');
+Route::any('/wechat_list','wechat\WechatController@wechat_list');
+Route::any('/create_qrcode','wechat\WechatController@create_qrcode');
+
+
+
 
 Route::any('/zhoukao','wechat\ZhoukaoController@index');
 Route::any('/send','wechat\ZhoukaoController@send');
@@ -114,6 +119,10 @@ Route::any('wechat/event','wechat\EventController@event');
 
 
 
+Route::prefix('work')->group(function () {
+    Route::any('/user','work\ReplyController@user');
+
+});
 
 
 
@@ -124,7 +133,6 @@ Route::any('wechat/event','wechat\EventController@event');
 
 
 
-    
 
 
 
