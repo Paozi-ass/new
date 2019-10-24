@@ -31,7 +31,7 @@ class EventController extends Controller
         $xml_obj = simplexml_load_string($info,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
         // dd($this->tools->get_wechat_user($xml_arr['FromUserName']));
-         dd($xml_arr);
+//         dd($xml_arr);
         // 关注操作
             if($xml_arr['MsgType']=="event" && $xml_arr['Event']=="subscribe"){
                 // dd('1111');
