@@ -25,6 +25,7 @@ class Tools{
     public function get_access_token()
     {
         $key = 'wechat_access_token';
+//        Cache::forget($key);die;
         // 判断缓存是否存在
         if(Cache::has($key)){
             // 取缓存
