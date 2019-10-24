@@ -34,7 +34,7 @@ class Tools{
             // 取不到，掉接口，缓存
             $re = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_APPSECRET'));
             $result = json_decode($re,true);
-            // dd($result);
+             dd($result);
             Cache::put($key,$result['access_token'],$result['expires_in']);
             $wechat_access_token = $result['access_token'];
         }
