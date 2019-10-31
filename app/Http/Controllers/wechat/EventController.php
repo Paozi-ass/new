@@ -62,14 +62,20 @@ class EventController extends Controller
             <Content><![CDATA[".$msg."]]></Content>
           </xml>";
         }
-    //     echo"<xml>
-    //     <ToUserName><![CDATA[gh_6a15bbd97d0e]]></ToUserName>
-    //     <FromUserName><![CDATA[oIW2quOl81K5sUNQHRXNIl_3ELtI]]></FromUserName>
-    //     <CreateTime>12345678</CreateTime>
-    //     <MsgType><![CDATA[text]]></MsgType>
-    //     <Content><![CDATA[你好]]></Content>
-    //   </xml>";
-
+//    图片回复
+        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="2")
+        {
+            $url ="C:\Users\闫小璐\Pictures\Saved Pictures\timg.jpg";
+            echo"<xml>
+              <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
+              <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
+              <CreateTime>".time()."</CreateTime>
+              <MsgType><![CDATA[image]]></MsgType>
+              <PicUrl><![CDATA[".$url."]]></PicUrl>
+              <MediaId><![CDATA[media_id]]></MediaId>
+              <MsgId>1234567890123456</MsgId>
+            </xml>";
+        }
 
     }
 }
