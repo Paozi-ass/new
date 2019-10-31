@@ -62,19 +62,25 @@ class EventController extends Controller
             <Content><![CDATA[".$msg."]]></Content>
           </xml>";
         }
-//    图片回复
-        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="2")
-        {
-            $url ="C:\Users\闫小璐\Pictures\Saved Pictures\timg.jpg";
-            echo"<xml>
-              <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
-              <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
-              <CreateTime>".time()."</CreateTime>
-              <MsgType><![CDATA[image]]></MsgType>
-              <PicUrl><![CDATA[".$url."]]></PicUrl>
-              <MediaId><![CDATA[media_id]]></MediaId>
-              <MsgId>1234567890123456</MsgId>
-            </xml>";
+
+//        $url = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=".$this->tools->get_access_token();
+////        dd($url);
+//        $re = $this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+//        dd($re);
+//    图文回复
+        if ($xml_arr['MsgType'] == 'text' && $xml_arr['Content'] == "2") {
+            $title="标题";
+            $description="描述";
+            $picurl="http://mmbiz.qpic.cn/mmbiz_jpg/BQaPpLPjHiadJ3hBIic3xLE2GbsEcC3u6ZXfadVhUV0I8ts97LpqbIWwVYnxbS7egYib7Uq5ABRCWwa339RlFTMiaA/0?wx_fmt=jpeg";
+            $url="https://www.chsi.com.cn/";
+            echo "<xml><ToUserName><![CDATA[" . $xml_arr['FromUserName'] . "]]>
+            </ToUserName><FromUserName><![CDATA[" . $xml_arr['ToUserName'] . "]]>
+            </FromUserName><CreateTime>" . time() . "</CreateTime><MsgType><![CDATA[news]]>
+            </MsgType><ArticleCount>1</ArticleCount>
+            <Articles><item><Title><![CDATA[".$title."]]></Title>
+                <Description><![CDATA[".$description."]]></Description>
+                <PicUrl><![CDATA[".$picurl."]]></PicUrl>
+            <Url><![CDATA[".$url."]]></Url></item></Articles></xml>";
         }
 
     }
