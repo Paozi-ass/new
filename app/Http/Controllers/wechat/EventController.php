@@ -69,8 +69,8 @@ class EventController extends Controller
 //        dd($re);
 //    图文回复
         if ($xml_arr['MsgType'] == 'text' && $xml_arr['Content'] == "2") {
-            $title="标题";
-            $description="描述";
+            $title="性别：男";
+            $description="昵称：Turth";
             $picurl="http://mmbiz.qpic.cn/mmbiz_jpg/BQaPpLPjHiadJ3hBIic3xLE2GbsEcC3u6ZXfadVhUV0I8ts97LpqbIWwVYnxbS7egYib7Uq5ABRCWwa339RlFTMiaA/0?wx_fmt=jpeg";
             $url="https://www.chsi.com.cn/";
             echo "<xml><ToUserName><![CDATA[" . $xml_arr['FromUserName'] . "]]>
