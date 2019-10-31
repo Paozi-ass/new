@@ -9,5 +9,5 @@ class Menu extends Model
     protected $table = 'menu';
 	protected $primaryKey='id';
     public $timestamps= false;
-    protected $fillable = ['first_name','second_name','envt','envt_key'];
+    protected $fillable = ['name','type','event','event_key','parent_id'];
 }

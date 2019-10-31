@@ -37,7 +37,10 @@ class EventController extends Controller
 //                 dd($xml_arr['FromUserName']);
                 $wechat_user = $this->tools->get_wechat_user($xml_arr['FromUserName']);
 //                 dd($wechat_user);
-                $msg = '你好'.$wechat_user['nickname'].'欢迎关注我的公众号!';
+                $msg = '你好'.$wechat_user['nickname'].'欢迎关注我的公众号!
+                        发送1 回复本班讲师名字
+                        发送2 回复本班讲师帅照';
+
                 echo "<xml>
               <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
                     <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
@@ -48,7 +51,7 @@ class EventController extends Controller
             }
 
         // 普通操作
-        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="闫小璐")
+        if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="1")
         {
             $msg = "闫小璐咋！闫小璐牛逼！！！";
             echo"<xml>
@@ -57,7 +60,6 @@ class EventController extends Controller
             <CreateTime>".time()."</CreateTime>
             <MsgType><![CDATA[text]]></MsgType>
             <Content><![CDATA[".$msg."]]></Content>
-            
           </xml>";
         }
     //     echo"<xml>

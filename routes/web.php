@@ -94,7 +94,6 @@ Route::any('/login','wechat\IndexController@login');
 Route::any('/wechat','wechat\IndexController@index');
 Route::any('/taglist','wechat\IndexController@tag_list');
 Route::any('/tagadd','wechat\IndexController@tag_add');
-Route::any('/wechat_message','wechat\IndexController@wechat_message');
 Route::any('/tag_add_do','wechat\IndexController@tag_add_do');
 Route::any('/tag_update','wechat\IndexController@tag_update');
 Route::any('/tag_update_do','wechat\IndexController@tag_update_do');
@@ -106,6 +105,7 @@ Route::any('/upload_do','wechat\ResourceController@upload_do');
 Route::any('/menu_list','wechat\MenuController@menu_list');
 Route::any('/create_menu','wechat\MenuController@create_menu');
 Route::any('/wechat_list','wechat\WechatController@wechat_list');
+Route::get('load_menu','wechat\MenuController@load_menu');
 Route::any('/create_qrcode','wechat\WechatController@create_qrcode');
 
 
@@ -125,9 +125,8 @@ Route::prefix('work')->group(function () {
 
 });
 
-
-
-
+Route::any('/cd_list',"wechat\CaidanController@cd_list");
+Route::any('/cd',"wechat\CaidanController@cd");
 
 
 

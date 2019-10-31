@@ -1,52 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>菜单列表</title>
 </head>
 <body>
+<center>
     <form action="{{url('create_menu')}}" method="post">
-    @csrf
-        <table>
-            <tr>
-                <td>类型：</td>
-                <td>
-                    <select name="type" id="">
-                        <option value="1">1</option><!--没有二级菜单的一级菜单-->
-                        <option value="2">2</option><!--二级菜单-->
-                        <option value="3">3</option><!--有二级菜单的一级菜单-->
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>一级菜单：</td>
-                <td><input type="text" name="first_name"></td>
-            </tr>
-            <tr>
-                <td>二级菜单：</td>
-                <td><input type="text" name="second_name"></td>
-            </tr>
-            <tr>
-                <td>事件类型：</td>
-                <td>
-                <select name="envt" id="">
-                    <option value="click">click</option>
-                    <option value="view">view</option>
-                </select>
-                </td>
-            </tr>
-            <tr>
-                <td>值：</td>
-                <td><input type="text" name="envt_key"></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="提交">
-                </td>
-            </tr>
-        </table>
+        @csrf
+        菜单等级：<select name="type" >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br/><br/>
+        <div id="first_name">
+            一级菜单名称：<input type="text" name="first_name">
+        </div><br/>
+        <div id="name" style="display:none">
+            一级菜单名称：<select name="name" id="">
+                @foreach($first_menu as $v)
+                    <option value="{{$v->id}}">{{$v->name}}</option>
+                @endforeach
+            </select><br/><br/>
+            二级菜单名称：<input type="text" name="second_name"><br/><br/>
+        </div>
+        <div id="event">
+            菜单事件类型：<select name="event" id="">
+                <option value="click">click</option>
+                <option value="view">view</option>
+            </select><br/><br/>
+            菜单事件值：<input type="text" name="event_key">
+        </div>
+
+        <br/>
+        <br/>
+        <input type="submit" value="提交">
     </form>
+</center>
+<script src="/jq.js"></script>
+<script>
+    $(function(){
+        $("select[name=type]").change(function(){
+            var type_val = this.value;
+            if(type_val == 2){
+                $('#event').show();
+                $('#first_name').hide();
+                $('#name').show();
+            }else if (type_val == 1){
+                $('#event').show();
+                $('#first_name').show();
+                $('#name').hide();
+            }else if(type_val == 3){
+                $('#event').hide();
+                $('#first_name').show();
+                $('#name').hide();
+            }
+        });
+    });
+</script>
 </body>
 </html>
