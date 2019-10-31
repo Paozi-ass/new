@@ -105,7 +105,7 @@ Route::any('/upload_do','wechat\ResourceController@upload_do');
 Route::any('/menu_list','wechat\MenuController@menu_list');
 Route::any('/create_menu','wechat\MenuController@create_menu');
 Route::any('/wechat_list','wechat\WechatController@wechat_list');
-Route::get('load_menu','wechat\MenuController@load_menu');
+Route::get('/load_menu','wechat\MenuController@load_menu');
 Route::any('/create_qrcode','wechat\WechatController@create_qrcode');
 
 
