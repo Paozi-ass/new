@@ -53,7 +53,7 @@ class EventController extends Controller
         // 普通操作
         if($xml_arr['MsgType']=="text" && $xml_arr['Content']=="1")
         {
-            $msg = "闫小璐咋！闫小璐牛逼！！！";
+            $msg = "闫小璐";
             echo"<xml>
             <ToUserName><![CDATA[".$xml_arr['FromUserName']."]]></ToUserName>
             <FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName>
